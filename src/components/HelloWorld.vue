@@ -1,19 +1,19 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <ul>
-      <li v-for="dataObj in dataList">
-        <BasicContent
-          :category_no="dataObj.category_no"
-          :message="dataObj.contents"
-          :email="dataObj.email"
-          :title="dataObj.title"
-          :updated_at="dataObj.updated_at"
-          :user_no="dataObj.user_no"
-          :contentNum="dataObj.no"
-        />
-      </li>
-    </ul>
+    <div>
+      <BasicContent
+        v-for="dataObj in dataList"
+        v-bind:key="dataObj.contentNum"
+        :category_no="dataObj.category_no"
+        :message="dataObj.contents"
+        :email="dataObj.email"
+        :title="dataObj.title"
+        :updated_at="dataObj.updated_at"
+        :user_no="dataObj.user_no"
+        :contentNum="dataObj.no"
+      />
+    </div>
   </div>
 </template>
 
@@ -32,6 +32,7 @@ export default {
     // Add a reference to the TodoList component in the components property
     BasicContent
   },
+
   mounted() {
     axios
       .get("http://comento.cafe24.com/request.php", {

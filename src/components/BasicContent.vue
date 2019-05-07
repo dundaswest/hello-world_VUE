@@ -1,5 +1,5 @@
 <template>
-  <div class="basicContainer">
+  <div class="basicContainer" v-on:click="handleClick(title)">
     <div id="header">
       <span id="category">{{category_no}}</span>
       <span id="contentNum">{{contentNum}}</span>
@@ -9,7 +9,7 @@
       <span id="updated_at">{{ updated_at}}</span>
     </div>
     <div id="textBox">
-      <div id="title" v-on:click="sayHello">{{title}}</div>
+      <div id="title">{{title}}</div>
       <div id="message">{{message}}</div>
     </div>
   </div>
@@ -26,8 +26,11 @@ export default {
     user_no: String,
     contentNum: String
   },
-
-  methods: { sayHello: () => alert("hello") }
+  methods: {
+    handleClick: function(title) {
+      console.log(title);
+    }
+  }
 };
 </script>
 
