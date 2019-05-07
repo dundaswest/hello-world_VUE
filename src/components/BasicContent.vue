@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <div class="basicContainer">
     <div id="header">
-      <span id="category">{{category}}</span>
+      <span id="category">{{category_no}}</span>
       <span id="contentNum">{{contentNum}}</span>
     </div>
     <div id="info">
       <span id="email">{{email}}</span>
-      <span id="createdAt">{{createdAt}}</span>
+      <span id="updated_at">{{ updated_at}}</span>
     </div>
     <div id="textBox">
-      <div id="title">{{title}}</div>
+      <div id="title" v-on:click="sayHello">{{title}}</div>
       <div id="message">{{message}}</div>
     </div>
   </div>
@@ -17,22 +17,25 @@
 
 <script>
 export default {
-  data() {
-    return {
-      category: "카테고리명",
-      contentNum: "글번호",
-      email: "이메일",
-      createdAt: "작성일",
-      title: "글제목",
-      message: "글재목을 가져와라 어서"
-    };
-  }
+  props: {
+    category_no: String,
+    message: String,
+    email: String,
+    title: String,
+    updated_at: String,
+    user_no: String,
+    contentNum: String
+  },
+
+  methods: { sayHello: () => alert("hello") }
 };
 </script>
 
 <style lang="less">
-#header {
+.basicContainer {
   border: 2px solid black;
+}
+#header {
   display: flex;
   justify-content: space-between;
 }
@@ -48,7 +51,7 @@ export default {
   flex-direction: column;
 }
 #email,
-#createdAt {
+#updated_at {
   margin: 7px;
 }
 #title {
