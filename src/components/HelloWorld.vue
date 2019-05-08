@@ -6,6 +6,7 @@
       <BasicContent
         v-for="dataObj in dataList"
         v-bind:key="dataObj.contentNum"
+        v-show="filterList.includes(dataObj.category_no)"
         :category_no="dataObj.category_no"
         :message="dataObj.contents"
         :email="dataObj.email"
