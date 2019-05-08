@@ -81,6 +81,17 @@ export default {
       return this.dataList.filter(data =>
         this.filterList.includes(data.category_no)
       );
+    },
+    listWithAds: function() {
+      let result = [];
+      this.dataList.forEach((data, index) => {
+        if (index && index % 4 === 0) {
+          result.push("ad");
+        } else {
+          result.push("content");
+        }
+        return result;
+      });
     }
   },
   methods: {}
