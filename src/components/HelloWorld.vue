@@ -1,12 +1,17 @@
 <template>
-  <div class="mainContainer" v-bind:class="{modalBackground: isModalShow }">
+  <div
+    class="mainContainer"
+    v-bind:class="{modalBackground: isModalShow }"
+    v-on:scroll="handleScroll"
+  >
     <h1>{{ msg }}</h1>
     <Header/>
     <div>
       <BasicContent
-        v-for="dataObj in dataList"
-        v-bind:key="dataObj.contentNum"
+        v-for="(dataObj,index) in dataList"
+        v-bind:key="dataObj.no"
         v-show="firstMounted || filterList.includes(dataObj.category_no)"
+        :index="index"
         :category_no="dataObj.category_no"
         :category="categoryList ? categoryList[dataObj.category_no -1].name : null"
         :message="dataObj.contents"
@@ -28,6 +33,7 @@ import Header from "./Header.vue";
 import Modal from "./Modal.vue";
 import Sponsored from "./Sponsored.vue";
 import axios from "axios";
+
 export default {
   name: "HelloWorld",
   props: {
@@ -94,7 +100,14 @@ export default {
       });
     }
   },
-  methods: {}
+  methods: {
+    handleScroll: function(evt, el) {
+      if (window.scrollY > 50) {
+        console.log("HALP");
+      }
+      return window.scrollY > 100;
+    }
+  }
 };
 </script>
 

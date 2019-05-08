@@ -14,7 +14,7 @@
         <div id="message">{{message}}</div>
       </div>
     </div>
-    <Sponsored v-show="contentNum % 3 === 0"/>
+    <Sponsored v-show="(index+1) % 3 === 0"/>
   </div>
 </template>
 
@@ -30,7 +30,8 @@ export default {
     updated_at: String,
     user_no: String,
     contentNum: String,
-    category: String
+    category: String,
+    index: Number
   },
   methods: {
     handleClick: function(title) {
