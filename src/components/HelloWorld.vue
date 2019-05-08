@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <Header/>
     <div>
       <BasicContent
         v-for="dataObj in dataList"
@@ -19,6 +20,7 @@
 
 <script>
 import BasicContent from "./BasicContent.vue";
+import Header from "./Header.vue";
 import axios from "axios";
 export default {
   name: "HelloWorld",
@@ -30,7 +32,8 @@ export default {
   },
   components: {
     // Add a reference to the TodoList component in the components property
-    BasicContent
+    BasicContent,
+    Header
   },
 
   mounted() {

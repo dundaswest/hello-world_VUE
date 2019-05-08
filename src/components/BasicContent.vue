@@ -37,6 +37,8 @@ export default {
 <style lang="less">
 .basicContainer {
   border: 2px solid black;
+  margin: 3px;
+  padding: 2px;
 }
 #header {
   display: flex;
