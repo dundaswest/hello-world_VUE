@@ -14,7 +14,7 @@
         <div id="message">{{message}}</div>
       </div>
     </div>
-    <Sponsored v-show="(index+1) % 3 === 0"/>
+    <Sponsored v-show="(index+1) % 4 === 0" :index="Math.floor((index)/3)+1"/>
   </div>
 </template>
 

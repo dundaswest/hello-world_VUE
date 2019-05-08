@@ -47,7 +47,7 @@ export default {
       filterList: [],
       currentSort: "오름차순",
       categoryList: null,
-      sponsoredList: null,
+      sponsoredList: [],
       page: 1
     };
   },
@@ -70,17 +70,6 @@ export default {
       return this.dataList.filter(data =>
         this.filterList.includes(data.category_no)
       );
-    },
-    listWithAds: function() {
-      let result = [];
-      this.dataList.forEach((data, index) => {
-        if (index && index % 4 === 0) {
-          result.push("ad");
-        } else {
-          result.push("content");
-        }
-        return result;
-      });
     }
   },
   methods: {
@@ -106,11 +95,11 @@ export default {
       axios
         .get("http://comento.cafe24.com/ads.php", {
           params: {
-            page: 1,
-            limit: 20
+            page: this.page,
+            limit: 10
           }
         })
-        .then(response => (this.sponsoredList = response.data.list))
+        .then(response => this.sponsoredList.push(...response.data.list))
         .catch(error => console.log(error));
     },
     handleScroll: function(evt) {
@@ -119,6 +108,7 @@ export default {
         document.documentElement.offsetHeight;
       if (bottomOfWindow) {
         this.getContentList(this.page);
+        this.getAdsList(this.page);
       }
     }
   }

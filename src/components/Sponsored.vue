@@ -5,10 +5,10 @@
     </div>
     <div id="body">
       <div>
-        <img v-bind:src="'http://comento.cafe24.com/public/images/' + img" id="image">
+        <img v-bind:src="'http://comento.cafe24.com/public/images/' + data.img" id="image">
       </div>
       <div id="textBox">
-        <div id="title">{{data.title}}</div>
+        <div id="title">{{data.title }}</div>
         <div id="text">{{data.contents}}</div>
       </div>
     </div>
@@ -18,10 +18,10 @@
 <script>
 import axios from "axios";
 export default {
-  props: {},
+  props: { index: Number },
   data() {
     return {
-      data: null,
+      data: this.$parent.$parent.sponsoredList[this.index],
       img: "test1.jpg"
     };
   },
@@ -30,17 +30,7 @@ export default {
       console.log(this.data);
     }
   },
-  mounted() {
-    axios
-      .get("http://comento.cafe24.com/ads.php", {
-        params: {
-          page: 4,
-          limit: 2
-        }
-      })
-      .then(response => (this.data = response.data.list[0]))
-      .catch(error => console.log(error));
-  }
+  mounted() {}
 };
 </script>
 
