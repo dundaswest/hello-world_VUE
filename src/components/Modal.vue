@@ -36,6 +36,11 @@ export default {
   margin: 3px;
   flex-direction: column;
   padding: 5px;
+  position: absolute;
+  top: -100%;
+  bottom: -100%;
+  left: -100%;
+  right: -100%;
 }
 #modalHeader {
   font-size: 15px;

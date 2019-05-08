@@ -20,6 +20,7 @@ export default {
   methods: {
     handleFilterClick: function() {
       console.log("filterClicked");
+      this.$parent.isModalShow = !this.$parent.isModalShow;
     }
   }
 };

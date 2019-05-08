@@ -15,11 +15,12 @@
         :contentNum="dataObj.no"
       />
     </div>
-    <Modal/>
+    <Modal v-show="isModalShow"/>
   </div>
 </template>
 
 <script>
+//v-bind:class="{modalBackground: isModalShow }"
 import BasicContent from "./BasicContent.vue";
 import Header from "./Header.vue";
 import Modal from "./Modal.vue";
@@ -32,6 +33,7 @@ export default {
   data() {
     return { dataList: null, isModalShow: false };
   },
+
   components: {
     // Add a reference to the TodoList component in the components property
     BasicContent,
@@ -59,6 +61,15 @@ export default {
   border: 5px solid black;
   width: 100%;
   height: 100%;
+}
+.modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10;
 }
 </style>
 
