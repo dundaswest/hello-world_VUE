@@ -32,8 +32,14 @@ export default {
   },
   methods: {
     handleCheckBoxClick: function(event) {
-      console.log(event.target);
-      this.checkedList.push(event.target.value);
+      const num = event.target.value;
+      const index = this.checkedList.indexOf(num);
+      console.log(num, index);
+      if (index === -1) {
+        this.checkedList.push(num);
+      } else {
+        this.checkedList.splice(index, 1);
+      }
     },
     handleCloseBtnClick: function() {
       this.$parent.isModalShow = false;
