@@ -8,6 +8,7 @@
         v-bind:key="dataObj.contentNum"
         v-show="firstMounted || filterList.includes(dataObj.category_no)"
         :category_no="dataObj.category_no"
+        :category="categoryList ? categoryList[dataObj.category_no -1].name : null"
         :message="dataObj.contents"
         :email="dataObj.email"
         :title="dataObj.title"
@@ -37,7 +38,8 @@ export default {
       firstMounted: true,
       isModalShow: false,
       filterList: [],
-      currentSort: "오름차순"
+      currentSort: "오름차순",
+      categoryList: null
     };
   },
 
@@ -56,6 +58,10 @@ export default {
         }
       })
       .then(response => (this.dataList = response.data.list))
+      .catch(error => console.log(error));
+    axios
+      .get("http://comento.cafe24.com/category.php", {})
+      .then(response => (this.categoryList = response.data.list))
       .catch(error => console.log(error));
   },
   computed: {

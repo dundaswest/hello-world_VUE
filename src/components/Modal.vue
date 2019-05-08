@@ -50,6 +50,7 @@ export default {
       .get("http://comento.cafe24.com/category.php", {})
       .then(response => (this.categoryList = response.data.list))
       .catch(error => console.log(error));
+    this.$parent.categoryList = this.categoryList;
   }
 };
 </script>

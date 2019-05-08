@@ -1,7 +1,7 @@
 <template>
   <div class="basicContainer" v-on:click="handleClick(title)">
     <div id="header">
-      <span id="category">{{category_no}}</span>
+      <span id="category">{{category}}</span>
       <span id="contentNum">{{contentNum}}</span>
     </div>
     <div id="info">
@@ -24,7 +24,8 @@ export default {
     title: String,
     updated_at: String,
     user_no: String,
-    contentNum: String
+    contentNum: String,
+    category: String
   },
   methods: {
     handleClick: function(title) {
