@@ -40,6 +40,7 @@ export default {
     },
     handleSendClick: function(event) {
       this.$parent.filterList = this.checkedList;
+      this.$parent.firstMounted = false;
     }
   },
   mounted() {

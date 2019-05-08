@@ -6,7 +6,7 @@
       <BasicContent
         v-for="dataObj in dataList"
         v-bind:key="dataObj.contentNum"
-        v-show="filterList.includes(dataObj.category_no)"
+        v-show="firstMounted || filterList.includes(dataObj.category_no)"
         :category_no="dataObj.category_no"
         :message="dataObj.contents"
         :email="dataObj.email"
@@ -22,6 +22,7 @@
 
 <script>
 //v-bind:class="{modalBackground: isModalShow }"
+/* */
 import BasicContent from "./BasicContent.vue";
 import Header from "./Header.vue";
 import Modal from "./Modal.vue";
@@ -33,7 +34,12 @@ export default {
     msg: String
   },
   data() {
-    return { dataList: null, isModalShow: false, filterList: [] };
+    return {
+      dataList: null,
+      firstMounted: true,
+      isModalShow: false,
+      filterList: []
+    };
   },
 
   components: {
@@ -53,6 +59,13 @@ export default {
       })
       .then(response => (this.dataList = response.data.list))
       .catch(error => console.log(error));
+  },
+  computed: {
+    showList: function() {
+      return this.dataList.filter(data =>
+        this.filterList.includes(data.category_no)
+      );
+    }
   }
 };
 </script>
