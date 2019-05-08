@@ -1,16 +1,18 @@
 <template>
-  <div id="ModalContainer">
-    <div id="modalHeader">
-      <div id="title">필터</div>
-      <div id="close" v-on:click="handleCloseBtnClick">X</div>
-    </div>
-    <div id="categoryDiv">
-      <input type="checkbox" name="category1" value="Bike" v-on:click="handleCheckBoxClick">카테고리1
-      <input type="checkbox" name="category2" value="Bike">카테고리2
-      <input type="checkbox" name="category3" value="Bike">카테고리3
-    </div>
-    <div id="btnDiv">
-      <button id="saveBtn">저장</button>
+  <div id="ModalContainer modal fade">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">필터</h5>
+        <div id="close" v-on:click="handleCloseBtnClick">X</div>
+      </div>
+      <div id="categoryDiv">
+        <input type="checkbox" name="category1" value="Bike" v-on:click="handleCheckBoxClick">카테고리1
+        <input type="checkbox" name="category2" value="Bike">카테고리2
+        <input type="checkbox" name="category3" value="Bike">카테고리3
+      </div>
+      <div class="modal-footer">
+        <button id="saveBtn">저장</button>
+      </div>
     </div>
   </div>
 </template>
@@ -42,9 +44,10 @@ export default {
   left: -100%;
   right: -100%;
 }
-#modalHeader {
+#modal-header {
   font-size: 15px;
   font-weight: bold;
+  border: none;
   width: 100%;
   padding: 20px;
   display: flex;
@@ -63,6 +66,5 @@ export default {
   justify-content: flex-end;
 }
 #saveBtn {
-  width: 40px;
 }
 </style>

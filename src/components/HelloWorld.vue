@@ -24,6 +24,7 @@
 import BasicContent from "./BasicContent.vue";
 import Header from "./Header.vue";
 import Modal from "./Modal.vue";
+
 import axios from "axios";
 export default {
   name: "HelloWorld",
