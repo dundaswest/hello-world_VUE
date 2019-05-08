@@ -108,11 +108,6 @@ export default {
       this.page = this.page + 1;
     },
     handleScroll: function(evt) {
-      /*
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        this.getContentList(this.page);
-      }
-      */
       let bottomOfWindow =
         document.documentElement.scrollTop + window.innerHeight ===
         document.documentElement.offsetHeight;
