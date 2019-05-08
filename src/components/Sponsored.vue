@@ -4,7 +4,9 @@
       <span id="head" v-on:click="handleClick">Sponsored</span>
     </div>
     <div id="body">
-      <img v-bind:src="'http://comento.cafe24.com/public/images/' + data.img" id="image">
+      <div>
+        <img v-bind:src="'http://comento.cafe24.com/public/images/' + data.img" id="image">
+      </div>
       <div id="textBox">
         <div id="title">{{data.title}}</div>
         <div id="text">{{data.contents}}</div>
@@ -24,6 +26,7 @@ export default {
   },
   methods: {
     handleClick: function() {
+      lo;
       console.log(this.data);
     }
   },
@@ -45,7 +48,11 @@ export default {
 #body {
   padding: 15px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: space-between;
+  @media (min-width: 480px) {
+    flex-direction: row;
+  }
 }
 #title,
 #text {
