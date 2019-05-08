@@ -1,5 +1,5 @@
 <template>
-  <div id="ModalContainer modal fade">
+  <div id="ModalContainer">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">필터</h5>
@@ -7,12 +7,7 @@
       </div>
       <div id="categoryDiv">
         <div class="category" v-for="categoryObj in categoryList" v-bind:key="categoryObj.no">
-          <input
-            type="checkbox"
-            v-bind:num="categoryObj.num"
-            v-bind:value="categoryObj.no"
-            v-on:click="handleCheckBoxClick"
-          >
+          <input type="checkbox" v-bind:value="categoryObj.no" v-on:click="handleCheckBoxClick">
           <label>{{categoryObj.name}}</label>
         </div>
       </div>
@@ -34,7 +29,7 @@ export default {
     handleCheckBoxClick: function(event) {
       const num = event.target.value;
       const index = this.checkedList.indexOf(num);
-      console.log(num, index);
+
       if (index === -1) {
         this.checkedList.push(num);
       } else {
@@ -63,11 +58,13 @@ export default {
   display: flex;
   height: 300px;
   width: 600px;
-  margin: 3px;
   flex-direction: column;
-  padding: 5px;
   position: absolute;
-  margin: 0px auto;
+  top: -150%;
+  bottom: -100%;
+  right: -100%;
+  left: -100%;
+  margin: auto;
 }
 #modal-header {
   font-size: 15px;

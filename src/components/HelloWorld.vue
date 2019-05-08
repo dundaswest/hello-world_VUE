@@ -21,8 +21,6 @@
 </template>
 
 <script>
-//v-bind:class="{modalBackground: isModalShow }"
-/* */
 import BasicContent from "./BasicContent.vue";
 import Header from "./Header.vue";
 import Modal from "./Modal.vue";
@@ -38,12 +36,12 @@ export default {
       dataList: null,
       firstMounted: true,
       isModalShow: false,
-      filterList: []
+      filterList: [],
+      currentSort: "오름차순"
     };
   },
 
   components: {
-    // Add a reference to the TodoList component in the components property
     BasicContent,
     Header,
     Modal
@@ -66,11 +64,12 @@ export default {
         this.filterList.includes(data.category_no)
       );
     }
-  }
+  },
+  methods: {}
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style lang="less">
 .mainContainer {
   border: 5px solid black;
@@ -78,13 +77,13 @@ export default {
   height: 100%;
 }
 .modalBackground {
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background: #000;
   opacity: 0.7;
   z-index: 10;
+  position: relative;
+  overflow: hidden;
 }
 </style>
 
