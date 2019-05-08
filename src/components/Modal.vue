@@ -56,7 +56,7 @@ export default {
   height: 300px;
   width: 600px;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   top: -100%;
   bottom: -100%;
   right: -100%;
