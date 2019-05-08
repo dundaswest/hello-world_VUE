@@ -23,7 +23,10 @@ import axios from "axios";
 export default {
   name: "ModalContainer",
   data() {
-    return { categoryList: null, checkedList: [] };
+    return { checkedList: [] };
+  },
+  props: {
+    categoryList: Array
   },
   methods: {
     handleCheckBoxClick: function(event) {
@@ -44,13 +47,6 @@ export default {
       this.$parent.firstMounted = false;
       this.$parent.isModalShow = false;
     }
-  },
-  mounted() {
-    axios
-      .get("http://comento.cafe24.com/category.php", {})
-      .then(response => (this.categoryList = response.data.list))
-      .catch(error => console.log(error));
-    this.$parent.categoryList = this.categoryList;
   }
 };
 </script>

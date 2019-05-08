@@ -17,7 +17,7 @@
         :contentNum="dataObj.no"
       />
     </div>
-    <Modal v-show="isModalShow"/>
+    <Modal v-show="isModalShow" :categoryList="categoryList"/>
   </div>
 </template>
 
