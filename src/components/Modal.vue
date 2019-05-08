@@ -6,27 +6,47 @@
         <div id="close" v-on:click="handleCloseBtnClick">X</div>
       </div>
       <div id="categoryDiv">
-        <input type="checkbox" name="category1" value="Bike" v-on:click="handleCheckBoxClick">카테고리1
-        <input type="checkbox" name="category2" value="Bike">카테고리2
-        <input type="checkbox" name="category3" value="Bike">카테고리3
+        <div class="category" v-for="categoryObj in categoryList" v-bind:key="categoryObj.no">
+          <input
+            type="checkbox"
+            v-bind:num="categoryObj.num"
+            v-bind:value="categoryObj.no"
+            v-on:click="handleCheckBoxClick"
+          >
+          <label>{{categoryObj.name}}</label>
+        </div>
       </div>
       <div class="modal-footer">
-        <button id="saveBtn">저장</button>
+        <button id="saveBtn" v-on:click="handleSendClick">저장</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "ModalContainer",
+  data() {
+    return { categoryList: null, checkedList: [] };
+  },
   methods: {
-    handleCheckBoxClick: function() {
-      console.log("checkBoxClicked");
+    handleCheckBoxClick: function(event) {
+      console.log(event.target);
+      this.checkedList.push(event.target.value);
     },
     handleCloseBtnClick: function() {
-      console.log("close");
+      this.$parent.isModalShow = false;
+    },
+    handleSendClick: function(event) {
+      this.$parent.filterList = this.checkedList;
     }
+  },
+  mounted() {
+    axios
+      .get("http://comento.cafe24.com/category.php", {})
+      .then(response => (this.categoryList = response.data.list))
+      .catch(error => console.log(error));
   }
 };
 </script>
@@ -39,10 +59,7 @@ export default {
   flex-direction: column;
   padding: 5px;
   position: absolute;
-  top: -100%;
-  bottom: -100%;
-  left: -100%;
-  right: -100%;
+  margin: 0px auto;
 }
 #modal-header {
   font-size: 15px;
@@ -57,9 +74,15 @@ export default {
   margin-left: 3px;
 }
 #categoryDiv {
-  margin: 30px 30px;
+  margin: 20px;
   padding: 10px;
   display: flex;
+}
+.category {
+  margin: 30px 30px;
+}
+label {
+  margin-left: 5px;
 }
 #btnDiv {
   display: flex;

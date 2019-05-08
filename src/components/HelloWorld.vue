@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="mainContainer" v-bind:class="{modalBackground: isModalShow }">
     <h1>{{ msg }}</h1>
     <Header/>
     <div>
@@ -32,7 +32,7 @@ export default {
     msg: String
   },
   data() {
-    return { dataList: null, isModalShow: false };
+    return { dataList: null, isModalShow: false, filterList: [] };
   },
 
   components: {
@@ -58,18 +58,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less">
-.hello {
+.mainContainer {
   border: 5px solid black;
   width: 100%;
   height: 100%;
 }
 .modalBackground {
-  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: #000;
+  opacity: 0.7;
   z-index: 10;
 }
 </style>
