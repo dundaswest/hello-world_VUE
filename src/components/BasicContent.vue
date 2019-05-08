@@ -1,22 +1,27 @@
 <template>
-  <div class="basicContainer" v-on:click="handleClick(title)">
-    <div id="header">
-      <span id="category">{{category}}</span>
-      <span id="contentNum">{{contentNum}}</span>
+  <div>
+    <div class="basicContainer" v-on:click="handleClick(title)">
+      <div id="header">
+        <span id="category">{{category}}</span>
+        <span id="contentNum">{{contentNum}}</span>
+      </div>
+      <div id="info">
+        <span id="email">{{email}}</span>
+        <span id="updated_at">{{ updated_at}}</span>
+      </div>
+      <div id="textBox">
+        <div id="title">{{title}}</div>
+        <div id="message">{{message}}</div>
+      </div>
     </div>
-    <div id="info">
-      <span id="email">{{email}}</span>
-      <span id="updated_at">{{ updated_at}}</span>
-    </div>
-    <div id="textBox">
-      <div id="title">{{title}}</div>
-      <div id="message">{{message}}</div>
-    </div>
+    <Sponsored v-show="contentNum % 3 === 0"/>
   </div>
 </template>
 
 <script>
+import Sponsored from "./Sponsored";
 export default {
+  components: { Sponsored },
   props: {
     category_no: String,
     message: String,

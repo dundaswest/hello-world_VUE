@@ -34,7 +34,7 @@ export default {
     axios
       .get("http://comento.cafe24.com/ads.php", {
         params: {
-          page: 1,
+          page: 3,
           limit: 2
         }
       })
