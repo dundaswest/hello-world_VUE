@@ -15,12 +15,14 @@
         :contentNum="dataObj.no"
       />
     </div>
+    <Modal/>
   </div>
 </template>
 
 <script>
 import BasicContent from "./BasicContent.vue";
 import Header from "./Header.vue";
+import Modal from "./Modal.vue";
 import axios from "axios";
 export default {
   name: "HelloWorld",
@@ -28,12 +30,13 @@ export default {
     msg: String
   },
   data() {
-    return { dataList: null };
+    return { dataList: null, isModalShow: false };
   },
   components: {
     // Add a reference to the TodoList component in the components property
     BasicContent,
-    Header
+    Header,
+    Modal
   },
 
   mounted() {

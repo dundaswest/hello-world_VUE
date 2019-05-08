@@ -1,5 +1,5 @@
 <template>
-  <div id="headerContainer" v-on:click="handleFilterClick">
+  <div id="headerContainer">
     <div id="filter" v-on:click="handleFilterClick">
       <button>필터</button>
     </div>
