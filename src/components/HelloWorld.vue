@@ -17,6 +17,7 @@
         :contentNum="dataObj.no"
       />
     </div>
+    <Sponsored/>
     <Modal v-show="isModalShow" :categoryList="categoryList"/>
   </div>
 </template>
@@ -25,7 +26,7 @@
 import BasicContent from "./BasicContent.vue";
 import Header from "./Header.vue";
 import Modal from "./Modal.vue";
-
+import Sponsored from "./Sponsored.vue";
 import axios from "axios";
 export default {
   name: "HelloWorld",
@@ -39,14 +40,16 @@ export default {
       isModalShow: false,
       filterList: [],
       currentSort: "오름차순",
-      categoryList: null
+      categoryList: null,
+      sponsoredList: null
     };
   },
 
   components: {
     BasicContent,
     Header,
-    Modal
+    Modal,
+    Sponsored
   },
 
   mounted() {
@@ -62,6 +65,15 @@ export default {
     axios
       .get("http://comento.cafe24.com/category.php", {})
       .then(response => (this.categoryList = response.data.list))
+      .catch(error => console.log(error));
+    axios
+      .get("http://comento.cafe24.com/ads.php", {
+        params: {
+          page: 1,
+          limit: 20
+        }
+      })
+      .then(response => (this.sponsoredList = response.data.list))
       .catch(error => console.log(error));
   },
   computed: {
