@@ -5,7 +5,7 @@
     </div>
     <div id="body">
       <div>
-        <img v-bind:src="'http://comento.cafe24.com/public/images/' + data.img" id="image">
+        <img v-bind:src="'http://comento.cafe24.com/public/images/' + img" id="image">
       </div>
       <div id="textBox">
         <div id="title">{{data.title}}</div>
@@ -21,12 +21,12 @@ export default {
   props: {},
   data() {
     return {
-      data: null
+      data: null,
+      img: "test1.jpg"
     };
   },
   methods: {
     handleClick: function() {
-      lo;
       console.log(this.data);
     }
   },
@@ -34,7 +34,7 @@ export default {
     axios
       .get("http://comento.cafe24.com/ads.php", {
         params: {
-          page: 3,
+          page: 4,
           limit: 2
         }
       })

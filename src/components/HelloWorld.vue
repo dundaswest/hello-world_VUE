@@ -41,13 +41,14 @@ export default {
   },
   data() {
     return {
-      dataList: null,
+      dataList: [],
       firstMounted: true,
       isModalShow: false,
       filterList: [],
       currentSort: "오름차순",
       categoryList: null,
-      sponsoredList: null
+      sponsoredList: null,
+      page: 1
     };
   },
 
@@ -59,15 +60,7 @@ export default {
   },
 
   mounted() {
-    axios
-      .get("http://comento.cafe24.com/request.php", {
-        params: {
-          page: 1,
-          ord: "asc"
-        }
-      })
-      .then(response => (this.dataList = response.data.list))
-      .catch(error => console.log(error));
+    this.getContentList(this.page);
     axios
       .get("http://comento.cafe24.com/category.php", {})
       .then(response => (this.categoryList = response.data.list))
@@ -81,6 +74,7 @@ export default {
       })
       .then(response => (this.sponsoredList = response.data.list))
       .catch(error => console.log(error));
+    window.addEventListener("scroll", this.handleScroll);
   },
   computed: {
     showList: function() {
@@ -101,11 +95,30 @@ export default {
     }
   },
   methods: {
-    handleScroll: function(evt, el) {
-      if (window.scrollY > 50) {
-        console.log("HALP");
+    getContentList: function(page) {
+      axios
+        .get("http://comento.cafe24.com/request.php", {
+          params: {
+            page: page,
+            ord: "asc"
+          }
+        })
+        .then(response => this.dataList.push(...response.data.list))
+        .catch(error => console.log(error));
+      this.page = this.page + 1;
+    },
+    handleScroll: function(evt) {
+      /*
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        this.getContentList(this.page);
       }
-      return window.scrollY > 100;
+      */
+      let bottomOfWindow =
+        document.documentElement.scrollTop + window.innerHeight ===
+        document.documentElement.offsetHeight;
+      if (bottomOfWindow) {
+        this.getContentList(this.page);
+      }
     }
   }
 };
