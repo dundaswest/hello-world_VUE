@@ -61,19 +61,8 @@ export default {
 
   mounted() {
     this.getContentList(this.page);
-    axios
-      .get("http://comento.cafe24.com/category.php", {})
-      .then(response => (this.categoryList = response.data.list))
-      .catch(error => console.log(error));
-    axios
-      .get("http://comento.cafe24.com/ads.php", {
-        params: {
-          page: 1,
-          limit: 20
-        }
-      })
-      .then(response => (this.sponsoredList = response.data.list))
-      .catch(error => console.log(error));
+    this.getCategoryList();
+    this.getAdsList();
     window.addEventListener("scroll", this.handleScroll);
   },
   computed: {
@@ -106,6 +95,23 @@ export default {
         .then(response => this.dataList.push(...response.data.list))
         .catch(error => console.log(error));
       this.page = this.page + 1;
+    },
+    getCategoryList: function() {
+      axios
+        .get("http://comento.cafe24.com/category.php", {})
+        .then(response => (this.categoryList = response.data.list))
+        .catch(error => console.log(error));
+    },
+    getAdsList: function() {
+      axios
+        .get("http://comento.cafe24.com/ads.php", {
+          params: {
+            page: 1,
+            limit: 20
+          }
+        })
+        .then(response => (this.sponsoredList = response.data.list))
+        .catch(error => console.log(error));
     },
     handleScroll: function(evt) {
       let bottomOfWindow =
