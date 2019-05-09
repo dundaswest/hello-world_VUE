@@ -1,6 +1,6 @@
 <template>
-  <div class="mainContainer">
-    <div class="main" v-bind:class="{modalBackground: isModalShow }" v-on:scroll="handleScroll">
+  <div class="mainContainer" v-on:scroll="handleScroll">
+    <div class="main" v-bind:class="{modalBackground: isModalShow }">
       <h1></h1>
       <Header/>
       <div>
