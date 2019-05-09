@@ -73,6 +73,16 @@ export default {
       this.dataList = this.dataList.filter(data =>
         val.includes(data.category_no)
       );
+    },
+    currentSort: function(val) {
+      console.log(val);
+      let sorted = this.dataList.slice();
+      if (this.currentSort === "asc") {
+        sorted.sort((a, b) => parseInt(a.no) - parseInt(b.no));
+      } else {
+        sorted.sort((a, b) => parseInt(b.no) - parseInt(a.no));
+      }
+      this.dataList = sorted;
     }
   },
   methods: {
@@ -92,11 +102,19 @@ export default {
               filterList.includes(data.category_no)
             );
           }
-
           this.dataList.push(...filteredResult);
         })
         .catch(error => console.log(error));
       this.page = this.page + 1;
+    },
+    sortList: function() {
+      let sorted = this.dataList.slice();
+      if (this.currentSort === "asc") {
+        this.dataList.sort((a, b) => parseInt(a.no) - parseInt(b.no));
+      } else {
+        this.dataList.sort((a, b) => parseInt(b.no) - parseInt(a.no));
+      }
+      this.dataList = sorted;
     },
     getCategoryList: function() {
       axios

@@ -27,16 +27,6 @@ export default {
     handleSortClick: function() {
       this.currentSort = event.target.innerHTML === "오름차순" ? "asc" : "desc";
       this.$parent.currentSort = this.currentSort;
-      this.sortList();
-    },
-    sortList: function() {
-      let dataList = this.$parent.dataList;
-      if (this.currentSort === "asc") {
-        dataList.sort((a, b) => parseInt(a.no) - parseInt(b.no));
-      } else {
-        dataList.sort((a, b) => parseInt(b.no) - parseInt(a.no));
-      }
-      this.$parent.dataList = dataList;
     }
   }
 };
