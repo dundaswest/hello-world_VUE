@@ -17,7 +17,7 @@
             :contentNum="dataObj.no"
           />
           <!-- 4번째 content마다 sponsored Compoent를 붙임 -->
-          <!-- adsLoading(광고 Data loading이 끝나면  render) -->
+          <!-- adsLoading(광고 Data loading이 끝나면 render) -->
           <div v-if="(index + 1) % 4 === 0 && !adsLoading">
             <Sponsored :index="Math.floor((index + 1)/4)"/>
           </div>
@@ -69,6 +69,7 @@ export default {
     window.addEventListener("scroll", this.handleScroll);
   },
   watch: {
+    //filterList(사과,코코넛 등등 체크한 category)가 바뀔 때마다 dataList를 filter된 list로 set
     filterList: function(val) {
       this.dataList = this.dataList.filter(data =>
         val.includes(data.category_no)
@@ -135,6 +136,7 @@ export default {
         })
         .then(response => {
           this.sponsoredList.push(...response.data.list);
+          //response 받기 완료
           this.adsLoading = false;
         })
         .catch(error => console.log(error));

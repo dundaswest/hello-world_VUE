@@ -50,6 +50,7 @@ export default {
       }
     },
     handleCloseBtnClick: function() {
+      //
       this.$parent.isModalShow = false;
     },
     handleSendClick: function(event) {
