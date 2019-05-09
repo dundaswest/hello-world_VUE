@@ -39,7 +39,7 @@ export default {
   padding: 15px;
   display: flex;
   flex-direction: column;
-
+  align-items: center;
   @media (min-width: 480px) {
     flex-direction: row;
   }
@@ -53,7 +53,10 @@ export default {
   height: 80%;
   padding: 10px;
 }
-
+#textBox {
+  display: flex;
+  align-items: center;
+}
 #header {
   padding: 10px;
 }
