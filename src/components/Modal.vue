@@ -24,38 +24,37 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "ModalContainer",
-
   props: {
     categoryList: Array
   },
+
   data() {
     return { checkedList: [] };
   },
   created() {
     this.checkedList = this.categoryList.map(category => category.no);
   },
-
   methods: {
     handleCheckBoxClick: function(event) {
       const value = event.target.value;
-
       const isChecked = event.target.checked;
 
-      if (!isChecked) {
+      if (isChecked) {
         this.checkedList.push(value);
       } else {
         this.checkedList = this.checkedList.filter(
           listItem => listItem !== value
         );
       }
+      console.log(this.checkedList);
     },
     handleCloseBtnClick: function() {
       this.$parent.isModalShow = false;
     },
     handleSendClick: function(event) {
+      console.log(this.$parent.categoryList);
       this.$parent.filterList = this.checkedList;
       this.$parent.firstMounted = false;
       this.$parent.isModalShow = false;
