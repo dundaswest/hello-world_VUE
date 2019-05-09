@@ -49,7 +49,7 @@ export default {
       categoryList: [],
       sponsoredList: [],
       page: 1,
-      isLoading: true
+      adsLoading: true
     };
   },
 
