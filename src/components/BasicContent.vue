@@ -10,7 +10,7 @@
         <span id="updated_at">{{ updated_at}}</span>
       </div>
       <div id="textBox">
-        <div id="title">{{title}}</div>
+        <div id="title">{{title.split(' ')[1]}}</div>
         <div id="message">{{message.length > 100 ? message.slice(0,100) + '...': message}}</div>
       </div>
     </div>
@@ -32,6 +32,7 @@ export default {
   },
 
   methods: {
+    // TODO 클릭하면 해당 content 상세 페이지로 이동
     handleClick: function(title) {
       console.log(title);
     }
@@ -41,7 +42,7 @@ export default {
 
 <style lang="less">
 .basicContainer {
-  border: 2px solid black;
+  border: 1px solid black;
   margin: 3px;
   padding: 2px;
 }
@@ -60,9 +61,15 @@ export default {
 #textBox {
   flex-direction: column;
 }
+
 #email,
 #updated_at {
-  margin: 7px;
+  margin: 8px;
+}
+#email {
+  padding: 2x;
+  align-self: center;
+  margin-left: 10px;
 }
 #title {
   font-weight: bold;

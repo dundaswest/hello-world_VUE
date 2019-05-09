@@ -1,31 +1,31 @@
 <template>
-  <div
-    class="mainContainer"
-    v-bind:class="{modalBackground: isModalShow }"
-    v-on:scroll="handleScroll"
-  >
-    <h1>{{ msg }}</h1>
-    <Header/>
-    <div>
-      <div v-for="(dataObj, index) in dataList" v-bind:key="index">
-        <BasicContent
-          :index="index"
-          :category_no="dataObj.category_no"
-          :category="categoryList ? categoryList[dataObj.category_no -1].name : null"
-          :message="dataObj.contents"
-          :email="dataObj.email"
-          :title="dataObj.title"
-          :updated_at="dataObj.updated_at"
-          :user_no="dataObj.user_no"
-          :contentNum="dataObj.no"
-        />
-        <div v-if="(index + 1) % 4 === 0 && !adsLoading">
-          <Sponsored :index="Math.floor((index + 1)/4)"/>
+  <div class="mainContainer">
+    <div class="main" v-bind:class="{modalBackground: isModalShow }" v-on:scroll="handleScroll">
+      <h1></h1>
+      <Header/>
+      <div>
+        <div v-for="(dataObj, index) in dataList" v-bind:key="index">
+          <BasicContent
+            :index="index"
+            :category_no="dataObj.category_no"
+            :category="categoryList ? categoryList[dataObj.category_no -1].name : null"
+            :message="dataObj.contents"
+            :email="dataObj.email"
+            :title="dataObj.title"
+            :updated_at="dataObj.updated_at"
+            :user_no="dataObj.user_no"
+            :contentNum="dataObj.no"
+          />
+          <!-- 4번째 content마다 sponsored Compoent를 붙임 -->
+          <!-- adsLoading(광고 Data loading이 끝나면  render) -->
+          <div v-if="(index + 1) % 4 === 0 && !adsLoading">
+            <Sponsored :index="Math.floor((index + 1)/4)"/>
+          </div>
         </div>
       </div>
-    </div>
 
-    <Modal v-if="categoryList" v-show="isModalShow" :categoryList="categoryList"/>
+      <Modal v-if="categoryList" v-show="isModalShow" :categoryList="categoryList"/>
+    </div>
   </div>
 </template>
 
@@ -155,9 +155,15 @@ export default {
 
 <style lang="less">
 .mainContainer {
-  border: 5px solid black;
   width: 100%;
   height: 100%;
+  display: flex;
+}
+.main {
+  margin: 0 auto;
+  border: 1px solid black;
+  width: 70%;
+  height: 70%;
 }
 .modalBackground {
   width: 100%;

@@ -48,13 +48,11 @@ export default {
           listItem => listItem !== value
         );
       }
-      console.log(this.checkedList);
     },
     handleCloseBtnClick: function() {
       this.$parent.isModalShow = false;
     },
     handleSendClick: function(event) {
-      console.log(this.$parent.categoryList);
       this.$parent.filterList = this.checkedList;
       this.$parent.firstMounted = false;
       this.$parent.isModalShow = false;

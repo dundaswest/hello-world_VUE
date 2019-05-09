@@ -1,10 +1,10 @@
 <template>
   <div class="sponsoredContainer">
     <div id="header">
-      <span id="head" v-on:click="handleClick">Sponsored</span>
+      <span id="head">Sponsored</span>
     </div>
     <div id="body">
-      <div>
+      <div id="imgDiv">
         <img v-bind:src="'http://comento.cafe24.com/public/images/' + data.img" id="image">
       </div>
       <div id="textBox">
@@ -22,21 +22,11 @@ export default {
   props: { index: Number },
   data() {
     return {
-      /*
-      data: this.$parent.sponsoredList[
-        this.index > 29 ? this.index / 30 : this.index
-      ] || { title: false, contents: false, img: "test1.jpg" },
-      img: "test1.jpg"
-      */
       data: this.$parent.sponsoredList[this.index],
       img: "test1.jpg"
     };
   },
-  methods: {
-    handleClick: function() {
-      console.log(this.data);
-    }
-  },
+
   mounted() {}
 };
 </script>
@@ -58,15 +48,22 @@ export default {
 #text {
   margin: 3px;
 }
-#textBox {
+#textBox,
+#imgDiv {
+  height: 80%;
   padding: 10px;
 }
+
 #header {
   padding: 10px;
 }
 img {
-  height: 300px;
-  width: 300px;
+  height: 80%;
+  width: 95%;
+  min-width: 190px;
+  @media (min-width: 480px) {
+    flex-direction: row;
+  }
 }
 </style>
 
