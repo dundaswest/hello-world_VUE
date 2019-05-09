@@ -66,14 +66,11 @@ export default {
     this.getAdsList();
     window.addEventListener("scroll", this.handleScroll);
   },
-  computed: {
-    showList: function() {
-      return this.dataList.filter(data =>
-        this.filterList.includes(data.category_no)
+  watch: {
+    filterList: function(val) {
+      this.dataList = this.dataList.filter(data =>
+        val.includes(data.category_no)
       );
-    },
-    categoryNums: function() {
-      return this.categoryList.map(e => e.no);
     }
   },
   methods: {
@@ -85,7 +82,16 @@ export default {
             ord: "asc"
           }
         })
-        .then(response => this.dataList.push(...response.data.list))
+        .then(response => {
+          let filteredResult = response.data.list;
+          const filterList = this.filterList;
+          if (filterList) {
+            filteredResult = filteredResult.filter(data =>
+              filterList.includes(data.category_no)
+            );
+          }
+          this.dataList.push(...filteredResult);
+        })
         .catch(error => console.log(error));
       this.page = this.page + 1;
     },
@@ -94,7 +100,6 @@ export default {
         .get("http://comento.cafe24.com/category.php", {})
         .then(response => {
           this.categoryList.push(...response.data.list);
-          this.isLoading = false;
         })
         .catch(error => console.log(error));
     },
