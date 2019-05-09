@@ -14,20 +14,11 @@
         <div id="message">{{message.length > 100 ? message.slice(0,100) + '...': message}}</div>
       </div>
     </div>
-    <Sponsored
-      v-show="(index+1) % 4 === 0 && !isLoading"
-      :index="Math.floor((index)/3) -1"
-      :obj="$parent.sponsoredList[
-        index > 29 ? index / 30 : index
-      ]"
-    />
   </div>
 </template>
 
 <script>
-import Sponsored from "./Sponsored";
 export default {
-  components: { Sponsored },
   props: {
     category_no: String,
     message: String,
@@ -37,8 +28,7 @@ export default {
     user_no: String,
     contentNum: String,
     category: String,
-    index: Number,
-    isLoading: Boolean
+    index: Number
   },
 
   methods: {

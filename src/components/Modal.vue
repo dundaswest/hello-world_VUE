@@ -29,16 +29,15 @@ export default {
   name: "ModalContainer",
 
   props: {
-    categoryList: Array,
-    categoryNums: Array
+    categoryList: Array
   },
   data() {
-    return { checkedList: this.categoryNums };
+    return { checkedList: [] };
+  },
+  created() {
+    this.checkedList = this.categoryList.map(category => category.no);
   },
 
-  mounted() {
-    console.log(this.$props);
-  },
   methods: {
     handleCheckBoxClick: function(event) {
       const value = event.target.value;
