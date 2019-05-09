@@ -7,7 +7,12 @@
       </div>
       <div id="categoryDiv">
         <div class="category" v-for="categoryObj in categoryList" v-bind:key="categoryObj.no">
-          <input type="checkbox" v-bind:value="categoryObj.no" v-on:click="handleCheckBoxClick">
+          <input
+            type="checkbox"
+            checked
+            v-bind:value="categoryObj.no"
+            v-on:click="handleCheckBoxClick"
+          >
           <label>{{categoryObj.name}}</label>
         </div>
       </div>
@@ -22,21 +27,30 @@
 import axios from "axios";
 export default {
   name: "ModalContainer",
-  data() {
-    return { checkedList: [] };
-  },
+
   props: {
-    categoryList: Array
+    categoryList: Array,
+    categoryNums: Array
+  },
+  data() {
+    return { checkedList: this.categoryNums };
+  },
+
+  mounted() {
+    console.log(this.$props);
   },
   methods: {
     handleCheckBoxClick: function(event) {
-      const num = event.target.value;
-      const index = this.checkedList.indexOf(num);
+      const value = event.target.value;
 
-      if (index === -1) {
-        this.checkedList.push(num);
+      const isChecked = event.target.checked;
+
+      if (!isChecked) {
+        this.checkedList.push(value);
       } else {
-        this.checkedList.splice(index, 1);
+        this.checkedList = this.checkedList.filter(
+          listItem => listItem !== value
+        );
       }
     },
     handleCloseBtnClick: function() {

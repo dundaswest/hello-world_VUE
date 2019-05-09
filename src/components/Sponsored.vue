@@ -5,29 +5,32 @@
     </div>
     <div id="body">
       <div>
-        <img v-bind:src="'http://comento.cafe24.com/public/images/' + data.img" id="image">
+        <img v-bind:src="'http://comento.cafe24.com/public/images/' + dataObj.img" id="image">
       </div>
       <div id="textBox">
-        <div id="title">{{data.title }}</div>
-        <div id="text">{{data.contents}}</div>
+        <div id="title">{{dataObj.title }}</div>
+        <div
+          id="text"
+        >{{dataObj.contents.length > 100 ? dataObj.contents.slice(0,100) + '...': dataObj.contents}}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 export default {
-  props: { index: Number },
+  props: { index: Number, obj: Object },
   data() {
     return {
-      data: this.$parent.$parent.sponsoredList[this.index],
+      dataObj: this.$parent.$parent.sponsoredList[
+        this.index > 29 ? this.index / 30 : this.index
+      ] || { title: false, contents: false, img: "test1.jpg" },
       img: "test1.jpg"
     };
   },
   methods: {
     handleClick: function() {
-      console.log(this.data);
+      console.log(this.$props);
     }
   },
   mounted() {}
@@ -35,11 +38,14 @@ export default {
 </script>
 
 <style lang="less">
+#sponsoredContainer {
+  margin: auto 0;
+}
 #body {
   padding: 15px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+
   @media (min-width: 480px) {
     flex-direction: row;
   }

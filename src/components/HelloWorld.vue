@@ -6,11 +6,8 @@
   >
     <h1>{{ msg }}</h1>
     <Header/>
-    <div>
+    <div v-for="(dataObj, index) in dataList" v-bind:key="index">
       <BasicContent
-        v-for="(dataObj,index) in dataList"
-        v-bind:key="dataObj.no"
-        v-show="firstMounted || filterList.includes(dataObj.category_no)"
         :index="index"
         :category_no="dataObj.category_no"
         :category="categoryList ? categoryList[dataObj.category_no -1].name : null"
@@ -21,9 +18,12 @@
         :user_no="dataObj.user_no"
         :contentNum="dataObj.no"
       />
+      <div v-if="(index + 1) % 4 === 0 && !adsLoading">
+        <Sponsored :index="Math.floor((index + 1)/4)"/>
+      </div>
     </div>
 
-    <Modal v-show="isModalShow" :categoryList="categoryList"/>
+    <Modal v-show="isModalShow" :categoryList="categoryList" :categoryNums="categoryNums"/>
   </div>
 </template>
 
@@ -45,10 +45,11 @@ export default {
       firstMounted: true,
       isModalShow: false,
       filterList: [],
-      currentSort: "오름차순",
-      categoryList: null,
+      currentSort: "asc",
+      categoryList: [],
       sponsoredList: [],
-      page: 1
+      page: 1,
+      isLoading: true
     };
   },
 
@@ -70,6 +71,9 @@ export default {
       return this.dataList.filter(data =>
         this.filterList.includes(data.category_no)
       );
+    },
+    categoryNums: function() {
+      return this.categoryList.map(e => e.no);
     }
   },
   methods: {
@@ -88,19 +92,23 @@ export default {
     getCategoryList: function() {
       axios
         .get("http://comento.cafe24.com/category.php", {})
-        .then(response => (this.categoryList = response.data.list))
+        .then(response => {
+          this.categoryList.push(...response.data.list);
+          this.isLoading = false;
+        })
         .catch(error => console.log(error));
     },
     getAdsList: function() {
-      axios
-        .get("http://comento.cafe24.com/ads.php", {
-          params: {
-            page: this.page,
-            limit: 10
-          }
-        })
-        .then(response => this.sponsoredList.push(...response.data.list))
-        .catch(error => console.log(error));
+      if (this.page < 5) {
+        axios
+          .get("http://comento.cafe24.com/ads.php", {
+            params: {
+              page: this.page - 1
+            }
+          })
+          .then(response => this.sponsoredList.push(...response.data.list))
+          .catch(error => console.log("Error from ads", error));
+      }
     },
     handleScroll: function(evt) {
       let bottomOfWindow =
@@ -108,7 +116,7 @@ export default {
         document.documentElement.offsetHeight;
       if (bottomOfWindow) {
         this.getContentList(this.page);
-        this.getAdsList(this.page);
+        this.getAdsList();
       }
     }
   }

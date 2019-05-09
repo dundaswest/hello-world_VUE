@@ -7,7 +7,7 @@
       <div class="asc" v-bind:class="{red: currentSort === asc}" v-on:click="handleSortClick()">
         <span>오름차순</span>
       </div>
-      <div class="dsc" v-bind:class="{red: currentSort === dsc}" v-on:click="handleSortClick()">
+      <div class="desc" v-bind:class="{red: currentSort === desc}" v-on:click="handleSortClick()">
         <span>내림차순</span>
       </div>
     </div>
@@ -18,14 +18,14 @@
 export default {
   name: "headerContainer",
   data() {
-    return { currentSort: "asc", asc: "asc", dsc: "dsc" };
+    return { currentSort: "asc", asc: "asc", desc: "desc" };
   },
   methods: {
     handleFilterClick: function() {
       this.$parent.isModalShow = !this.$parent.isModalShow;
     },
     handleSortClick: function() {
-      this.currentSort = event.target.innerHTML === "오름차순" ? "asc" : "dsc";
+      this.currentSort = event.target.innerHTML === "오름차순" ? "asc" : "desc";
       this.$parent.currentSort = this.currentSort;
       this.sortList();
     },
@@ -55,7 +55,7 @@ export default {
   display: flex;
 }
 .asc,
-.dsc {
+.desc {
   margin: 3px;
 }
 .red {
