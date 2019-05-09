@@ -83,6 +83,7 @@ export default {
         sorted.sort((a, b) => parseInt(b.no) - parseInt(a.no));
       }
       this.dataList = sorted;
+      console.log(this.dataList.map(e => e.no));
     }
   },
   methods: {
@@ -102,7 +103,13 @@ export default {
               filterList.includes(data.category_no)
             );
           }
-          this.dataList.push(...filteredResult);
+
+          if (this.currentSort === "asc") {
+            this.dataList.push(...filteredResult);
+          } else {
+            this.dataList.unshift(...filteredResult);
+          }
+          console.log(this.dataList.map(e => e.no));
         })
         .catch(error => console.log(error));
       this.page = this.page + 1;
