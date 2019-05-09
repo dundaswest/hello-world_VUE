@@ -5,13 +5,13 @@
     </div>
     <div id="body">
       <div>
-        <img v-bind:src="'http://comento.cafe24.com/public/images/' + dataObj.img" id="image">
+        <img v-bind:src="'http://comento.cafe24.com/public/images/' + data.img" id="image">
       </div>
       <div id="textBox">
-        <div id="title">{{dataObj.title }}</div>
+        <div id="title">{{data.title }}</div>
         <div
           id="text"
-        >{{dataObj.contents.length > 100 ? dataObj.contents.slice(0,100) + '...': dataObj.contents}}</div>
+        >{{data.contents.length > 100 ? data.contents.slice(0,100) + '...': data.contents}}</div>
       </div>
     </div>
   </div>
@@ -19,18 +19,22 @@
 
 <script>
 export default {
-  props: { index: Number, obj: Object },
+  props: { index: Number },
   data() {
     return {
-      dataObj: this.$parent.$parent.sponsoredList[
+      /*
+      data: this.$parent.sponsoredList[
         this.index > 29 ? this.index / 30 : this.index
       ] || { title: false, contents: false, img: "test1.jpg" },
+      img: "test1.jpg"
+      */
+      data: this.$parent.sponsoredList[this.index],
       img: "test1.jpg"
     };
   },
   methods: {
     handleClick: function() {
-      console.log(this.$props);
+      console.log(this.data);
     }
   },
   mounted() {}
@@ -65,3 +69,14 @@ img {
   width: 300px;
 }
 </style>
+
+
+
+
+
+
+
+
+
+
+
