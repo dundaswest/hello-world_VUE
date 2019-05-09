@@ -75,7 +75,6 @@ export default {
       );
     },
     currentSort: function(val) {
-      console.log(val);
       let sorted = this.dataList.slice();
       if (this.currentSort === "asc") {
         sorted.sort((a, b) => parseInt(a.no) - parseInt(b.no));
@@ -83,7 +82,6 @@ export default {
         sorted.sort((a, b) => parseInt(b.no) - parseInt(a.no));
       }
       this.dataList = sorted;
-      console.log(this.dataList.map(e => e.no));
     }
   },
   methods: {
@@ -109,7 +107,6 @@ export default {
           } else {
             this.dataList.unshift(...filteredResult);
           }
-          console.log(this.dataList.map(e => e.no));
         })
         .catch(error => console.log(error));
       this.page = this.page + 1;
